@@ -1,0 +1,55 @@
+{
+  "id": "3724ea8d-31bd-412c-ba91-40fb7f9d3b63",
+  "version": "2.0",
+  "name": "steam",
+  "url": "https://steamdb.info",
+  "tests": [{
+    "id": "290c12ff-966c-4af6-8676-29cf93c12421",
+    "name": "template",
+    "commands": [{
+      "id": "bfe17793-a5c2-40a1-9e49-6188d20d995e",
+      "comment": "",
+      "command": "open",
+      "target": "/app/359550/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1ea20af2-80cd-45a0-955b-5ac11db895cc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "928x872",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "11850b64-50fc-4932-b760-be9f4056b4cc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.highcharts-button-symbol",
+      "targets": [
+        ["css=.highcharts-button-symbol", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "a724402f-01d6-4c12-957e-83d26edfc16d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.highcharts-menu-item:nth-child(1)",
+      "targets": [
+        ["css=.highcharts-menu-item:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='highcharts-ituo500-0']/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6c29c762-a1cd-459f-a536-c2b484454de8",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://steamdb.info/"],
+  "plugins": []
+}

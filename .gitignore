@@ -1,3 +1,4 @@
-data/no-price-history/
-data/price-history/
-data/details
+/.idea/*
+/target/*
+*.iml
+/data/*

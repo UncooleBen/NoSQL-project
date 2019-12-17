@@ -4,7 +4,7 @@ import json
 import codecs
 
 URI = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false'
-SOURCE_DIRECTORY = '../details/'
+SOURCE_DIRECTORY = '../data/details/'
 SOURCE_FILES = os.listdir(SOURCE_DIRECTORY)
 
 record = open('record.txt', 'r')
@@ -27,7 +27,12 @@ for filename in SOURCE_FILES:
     with codecs.open(filepath, 'r', 'utf-8-sig') as fin:
         content = fin.read()
         json_dict = json.loads(content)
-    collection.insert_one(json_dict)
+        for key in json_dict:
+            json_dict = json_dict[key]
+            break
+    if (json_dict['success'] == True):
+        json_dict = json_dict['data']
+        collection.insert_one(json_dict)
     print('%s added to MongoDB.' % (appid))
     record.write(appid+'\n')
     

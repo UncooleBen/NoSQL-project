@@ -1,10 +1,11 @@
 package com.steamedegg.databaseservice;
 
 import com.steamedegg.model.App;
+import com.steamedegg.model.Category;
+import java.util.List;
 
-/**
- * @author Juntao Peng
- */
+/** @author Juntao Peng */
 public interface AppDao {
-    public App queryAppByAppId(int appId);
+  App queryAppByAppId(int appId);
+  List<App> queryAppByCategory(List<Category> categories);
 }

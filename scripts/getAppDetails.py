@@ -5,40 +5,39 @@ from time import sleep
 from os import path
 
 proxies = {
- "http": "http://127.0.0.1:10809",
- "https": "http://127.0.0.1:10809",
+"http": "http://127.0.0.1:1080",
+"https": "http://127.0.0.1:1080",
 }
 region = 'CN'
 language = 'schinese'
-start = 0
-end = 16
+start = 16
+end = 32
 appid_list = []
 
-for postfix in range(0, 16):
+for postfix in range(start, end):
     fin = open('sorted_appids/sorted_appids-%i.txt' % (postfix))
     appid_list += fin.read().split()
     fin.close()
 
-fexception=open("exception.txt",'w')
-
 for appid in appid_list:
+    filename = 'details/detail-%s.txt' % (appid)
+    if path.exists(filename):
+        print('Skipping APPID %s ' % (appid))
+        continue
+    # 200 requests every 5 minutes
+    sleep(1)
+    url = 'https://store.steampowered.com/api/appdetails?appids=%s&cc=%s&l=%s' % (appid, region, language)
+    while True:
+        try:
+            response = requests.get(url, proxies=proxies)
+            print('Getting APPID %s succeeded.' % (appid))
+            break
+        except:
+            print('Retrying on APPID %s.' % (appid))
     try:
-        filename = 'details/detail-%s.txt' % (appid)
-        if path.exists(filename):
-            print("skip: "+filename)
-            continue
-        # 200 requests every 5 minutes
-        sleep(1.5)
-        url = 'https://store.steampowered.com/api/appdetails?appids=%s&cc=%s&l=%s' % (appid, region, language)
-        with requests.get(url, proxies=proxies) as response:
-            json_dict = response.json()
-        print("output: "+filename)
+        json_dict = response.json()
         with codecs.open(filename, 'w', 'utf-8-sig') as fout:
             fout.write(json.dumps(json_dict, sort_keys=False, indent=4))
     except:
-        fexception.write(str(appid)+"\n")
-        print("exception occurs: "+filename)
-
-fexception.close()
-        
-
+        print('Format Error on APPID %s' % (appid))
+    

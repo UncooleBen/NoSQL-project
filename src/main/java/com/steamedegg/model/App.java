@@ -2,6 +2,9 @@ package com.steamedegg.model;
 
 import java.util.List;
 
+/**
+ * @author Juntao Peng, Shangzhen Li
+ */
 public class App {
   private String type;
   private String name;
@@ -12,13 +15,22 @@ public class App {
   private String supportedLanguages;
   private List<String> developers;
   private List<String> publishers;
-  private List<Platform> platforms;
+  private List<String> platforms;
   private int score;
   private List<String> categories;
-  private String genres;
+  private List<String> genres;
   private int recommendations;
   private long releaseDate;
   private String backgroundURL;
+  private String headerURL;
+
+  public String getHeaderURL() {
+    return headerURL;
+  }
+
+  public void setHeaderURL(String headerURL) {
+    this.headerURL = headerURL;
+  }
 
   public String getType() {
     return type;
@@ -92,11 +104,11 @@ public class App {
     this.publishers = publishers;
   }
 
-  public List<Platform> getPlatforms() {
+  public List<String> getPlatforms() {
     return platforms;
   }
 
-  public void setPlatforms(List<Platform> platforms) {
+  public void setPlatforms(List<String> platforms) {
     this.platforms = platforms;
   }
 
@@ -116,11 +128,11 @@ public class App {
     this.categories = categories;
   }
 
-  public String getGenres() {
+  public List<String> getGenres() {
     return genres;
   }
 
-  public void setGenres(String genres) {
+  public void setGenres(List<String> genres) {
     this.genres = genres;
   }
 

@@ -5,9 +5,9 @@ import com.mongodb.client.MongoCursor;
 import com.steamedegg.databaseservice.AppDao;
 import com.steamedegg.databaseservice.DatabaseService;
 import com.steamedegg.model.App;
+import com.steamedegg.model.Price;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,13 +21,20 @@ import static com.mongodb.client.model.Filters.eq;
  * @author Juntao Peng
  */
 public class AppDaoImpl extends DatabaseService implements AppDao {
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+    private List<SimpleDateFormat> sdfs = Arrays.asList(
+            new SimpleDateFormat("yyyy年MM月dd日"),
+            new SimpleDateFormat("yyyy年MM月"),
+            new SimpleDateFormat("yyyy年"));
+    private SimpleDateFormat priceSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     private App convertDocumentToApp(Document document) {
         String type = (String) document.get("type");
         String name = (String) document.get("name");
         int steamAppId = (int) document.get("steam_appid");
-        int requiredAge = (int) document.get("required_age");
+        int requiredAge = 0;
+        if (document.get("required_age") instanceof String) {
+            requiredAge = Integer.parseInt((String)document.get("required_age"));
+        }
         boolean isFree = (boolean) document.get("is_free");
         String detailedDescription = (String) document.get("detailed_description");
         String supportedLanguages = (String) document.get("supported_languages");
@@ -54,15 +61,55 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         }
         List<String> categories = new ArrayList<>();
         List<Document> categoriesList = (ArrayList<Document>) document.get("categories");
-        for (Document categoryDocument : categoriesList) {
-            String category = (String) categoryDocument.get("description");
-            categories.add(category);
+        if (categoriesList != null) {
+            for (Document categoryDocument : categoriesList) {
+                String category = (String) categoryDocument.get("description");
+                categories.add(category);
+            }
+        }
+        List<Price> prices = new ArrayList<>();
+        List<Document> pricesList = (ArrayList<Document>) document.get("prices");
+        if (pricesList != null) {
+            for (Document priceDocument : pricesList) {
+                Price price = new Price();
+                String dateString = (String) priceDocument.get("date");
+                String priceString = "";
+                if (priceDocument.get("price") instanceof String) {
+                    priceString = (String) priceDocument.get("price");
+                } else {
+                    priceString = String.valueOf((int)priceDocument.get("price"));
+                }
+                long date = 0;
+                try {
+                    date = this.priceSdf.parse(dateString).getTime();
+                } catch (ParseException pe) {
+
+                }
+                price.setDate(date);
+                price.setPrice(priceString);
+                prices.add(price);
+            }
+        }
+        String latestPrice = "";
+        if (prices.size()>0) {
+            Price latest = prices.get(prices.size()-1);
+            latestPrice = latest.getPrice();
         }
         List<String> genres = new ArrayList<>();
         List<Document> genresList = (ArrayList<Document>) document.get("genres");
-        for (Document genreDocument : genresList) {
-            String genre = (String) genreDocument.get("description");
-            genres.add(genre);
+        if (genresList != null) {
+            for (Document genreDocument : genresList) {
+                String genre = (String) genreDocument.get("description");
+                genres.add(genre);
+            }
+        }
+        List<String> screenshots = new ArrayList<>();
+        List<Document> screenshotsList = (ArrayList<Document>) document.get("screenshots");
+        if (screenshotsList != null) {
+            for (Document screenshotDocument : screenshotsList) {
+                String screenshot = (String) screenshotDocument.get("path_full");
+                screenshots.add(screenshot);
+            }
         }
         int recommendations = 0;
         Document recommendationsDocument = (Document) document.get("recommendations");
@@ -74,10 +121,14 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         long releaseDate = 0;
         if (!isComing) {
             String releaseString = (String) releaseDateDocument.get("date");
-            try {
-                releaseDate = this.sdf.parse(releaseString).getTime();
-            } catch (ParseException pe) {
-                pe.printStackTrace(System.err);
+            if (!"".equals(releaseString)) {
+                for (SimpleDateFormat sdf : this.sdfs) {
+                    try {
+                        releaseDate = sdf.parse(releaseString).getTime();
+                    } catch (ParseException pe) {
+
+                    }
+                }
             }
         }
         String backgroundURL = (String) document.get("background");
@@ -96,6 +147,9 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         app.setScore(score);
         app.setCategories(categories);
         app.setGenres(genres);
+        app.setScreenshots(screenshots);
+        app.setPrices(prices);
+        app.setLatestPrice(latestPrice);
         app.setRecommendations(recommendations);
         app.setReleaseDate(releaseDate);
         app.setBackgroundURL(backgroundURL);
@@ -147,5 +201,8 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         return apps;
     }
 
-
+    @Override
+    public int queryDocumentNumber() {
+        return (int) collection.countDocuments();
+    }
 }

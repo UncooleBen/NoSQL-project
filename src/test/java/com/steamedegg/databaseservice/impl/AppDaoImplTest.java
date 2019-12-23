@@ -15,9 +15,9 @@ class AppDaoImplTest {
 
     @Test
     void test() {
-        List<App> list = appDao.queryAllApp(0, 10);
+        List<App> list = appDao.queryAllApp(0, 5);
         for (App app : list) {
-            System.out.println(app.getName());
+            System.out.println(app.getDetailedDescription());
         }
     }
 

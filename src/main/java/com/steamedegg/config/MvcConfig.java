@@ -1,6 +1,8 @@
 package com.steamedegg.config;
 
 
+import com.steamedegg.databaseservice.AppDao;
+import com.steamedegg.databaseservice.impl.AppDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +40,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Bean
+    public AppDao getAppDao() {
+        return (new AppDaoImpl());
     }
 
 }

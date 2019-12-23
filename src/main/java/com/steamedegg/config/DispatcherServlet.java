@@ -2,6 +2,9 @@ package com.steamedegg.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * @author Juntao Peng
+ */
 public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

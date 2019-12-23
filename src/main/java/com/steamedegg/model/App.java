@@ -16,13 +16,40 @@ public class App {
   private List<String> developers;
   private List<String> publishers;
   private List<String> platforms;
+  private List<Price> prices;
+  private String latestPrice;
   private int score;
   private List<String> categories;
   private List<String> genres;
+  private List<String> screenshots;
   private int recommendations;
   private long releaseDate;
   private String backgroundURL;
   private String headerURL;
+
+  public String getLatestPrice() {
+    return latestPrice;
+  }
+
+  public void setLatestPrice(String latestPrice) {
+    this.latestPrice = latestPrice;
+  }
+
+  public List<Price> getPrices() {
+    return prices;
+  }
+
+  public void setPrices(List<Price> prices) {
+    this.prices = prices;
+  }
+
+  public List<String> getScreenshots() {
+    return screenshots;
+  }
+
+  public void setScreenshots(List<String> screenshots) {
+    this.screenshots = screenshots;
+  }
 
   public String getHeaderURL() {
     return headerURL;

@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.nosql</groupId>
     <artifactId>SteamedEgg</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>SteamedEgg Maven Webapp</name>
     <url>http://maven.apache.org</url>

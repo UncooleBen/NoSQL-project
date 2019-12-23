@@ -48,4 +48,11 @@ public interface AppDao {
      * @returnA list of apps that commensurate the given limit and skip
      */
     List<App> queryAllApp(int skip, int limit);
+
+    /**
+     * Query the number of documents.
+     *
+     * @return The total number of documents
+     */
+    int queryDocumentNumber();
 }

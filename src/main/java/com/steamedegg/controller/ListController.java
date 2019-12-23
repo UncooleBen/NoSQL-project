@@ -32,11 +32,11 @@ public class ListController {
         int totalDocumentNumber = this.appDao.queryDocumentNumber();
         int pageNumber = totalDocumentNumber / 20 + 1;
         List<Integer> firstPages = new ArrayList<>();
-        for (int i = page; i<=page + 4; i++) {
+        for (int i = page; i <= page + 4; i++) {
             firstPages.add(i);
         }
         List<Integer> secondPages = new ArrayList<>();
-        for (int i = pageNumber - 1; i<=pageNumber; i++) {
+        for (int i = pageNumber - 1; i <= pageNumber; i++) {
             secondPages.add(i);
         }
         mv.addObject("appList", appList);

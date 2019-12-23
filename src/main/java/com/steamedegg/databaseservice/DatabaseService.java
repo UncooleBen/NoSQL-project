@@ -1,7 +1,5 @@
 package com.steamedegg.databaseservice;
 
-import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -12,13 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseService {
 
-    @Value("${spring.datasource.dbUrl}")
-    String dbUrl;
-
     protected MongoClient mongoClient;
     protected MongoDatabase database;
     protected MongoCollection collection;
-
+    @Value("${spring.datasource.dbUrl}")
+    String dbUrl;
 
 
     public DatabaseService() {

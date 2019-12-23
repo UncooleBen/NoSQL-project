@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -32,11 +31,11 @@ public class IndexController {
         int totalDocumentNumber = this.appDao.queryDocumentNumber();
         int pageNumber = totalDocumentNumber / 20 + 1;
         List<Integer> firstPages = new ArrayList<>();
-        for (int i = 1; i<=5; i++) {
+        for (int i = 1; i <= 5; i++) {
             firstPages.add(i);
         }
         List<Integer> secondPages = new ArrayList<>();
-        for (int i = pageNumber - 1; i<=pageNumber; i++) {
+        for (int i = pageNumber - 1; i <= pageNumber; i++) {
             secondPages.add(i);
         }
         mv.addObject("appList", appList);

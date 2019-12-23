@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -28,5 +29,13 @@ public class DetailController {
         App app = this.appDao.queryAppByAppId(appid);
         mv.addObject("app", app);
         return mv;
+    }
+
+    @RequestMapping(value = "/chart", method = RequestMethod.GET)
+    @ResponseBody
+    public String getChartJSON(int appId) {
+        App app = this.appDao.queryAppByAppId(appId);
+        String json = app.getPricesJSON();
+        return json;
     }
 }

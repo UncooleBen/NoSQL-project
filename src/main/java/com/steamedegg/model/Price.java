@@ -1,7 +1,6 @@
 package com.steamedegg.model;
 
 
-
 /**
  * @author Juntao Peng
  */

@@ -1,12 +1,15 @@
 package com.steamedegg.databaseservice.impl;
 
-import com.mongodb.client.FindIterable;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCursor;
 import com.steamedegg.databaseservice.AppDao;
 import com.steamedegg.databaseservice.DatabaseService;
 import com.steamedegg.model.App;
 import com.steamedegg.model.Price;
+import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +36,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         int steamAppId = (int) document.get("steam_appid");
         int requiredAge = 0;
         if (document.get("required_age") instanceof String) {
-            requiredAge = Integer.parseInt((String)document.get("required_age"));
+            requiredAge = Integer.parseInt((String) document.get("required_age"));
         }
         boolean isFree = (boolean) document.get("is_free");
         String detailedDescription = (String) document.get("detailed_description");
@@ -77,7 +80,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
                 if (priceDocument.get("price") instanceof String) {
                     priceString = (String) priceDocument.get("price");
                 } else {
-                    priceString = String.valueOf((int)priceDocument.get("price"));
+                    priceString = String.valueOf((int) priceDocument.get("price"));
                 }
                 long date = 0;
                 try {
@@ -91,8 +94,8 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
             }
         }
         String latestPrice = "";
-        if (prices.size()>0) {
-            Price latest = prices.get(prices.size()-1);
+        if (prices.size() > 0) {
+            Price latest = prices.get(prices.size() - 1);
             latestPrice = latest.getPrice();
         }
         List<String> genres = new ArrayList<>();
@@ -156,6 +159,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         app.setHeaderURL(headerURL);
         return app;
     }
+
     @Override
     public App queryAppByAppId(int appId) {
         Document document = (Document) collection.find(eq("steam_appid", appId)).first();
@@ -187,11 +191,11 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         }
         return apps;
     }
-    
+
     @Override
     public List<App> queryAllApp(int skip, int limit) {
         MongoCursor documents = collection
-                .find()
+                .find().sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
         List<App> apps = new ArrayList<>();
         for (MongoCursor it = documents; it.hasNext(); ) {
@@ -205,4 +209,5 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
     public int queryDocumentNumber() {
         return (int) collection.countDocuments();
     }
+
 }

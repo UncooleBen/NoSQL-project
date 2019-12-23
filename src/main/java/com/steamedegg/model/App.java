@@ -1,189 +1,241 @@
 package com.steamedegg.model;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Juntao Peng, Shangzhen Li
  */
 public class App {
-  private String type;
-  private String name;
-  private int steamAppId;
-  private int requiredAge;
-  private boolean isFree;
-  private String detailedDescription;
-  private String supportedLanguages;
-  private List<String> developers;
-  private List<String> publishers;
-  private List<String> platforms;
-  private List<Price> prices;
-  private String latestPrice;
-  private int score;
-  private List<String> categories;
-  private List<String> genres;
-  private List<String> screenshots;
-  private int recommendations;
-  private long releaseDate;
-  private String backgroundURL;
-  private String headerURL;
+    private String type;
+    private String name;
+    private int steamAppId;
+    private int requiredAge;
+    private boolean isFree;
+    private String detailedDescription;
+    private String supportedLanguages;
+    private List<String> developers;
+    private List<String> publishers;
+    private List<String> platforms;
+    private List<Price> prices;
+    private String latestPrice;
+    private int score;
+    private List<String> categories;
+    private List<String> genres;
+    private List<String> screenshots;
+    private int recommendations;
+    private long releaseDate;
+    private String backgroundURL;
+    private String headerURL;
 
-  public String getLatestPrice() {
-    return latestPrice;
-  }
+    public String getPricesJSON() {
+//        var option = {
+//        xAxis: {
+//            type: 'category',
+//                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+//        },
+//        yAxis: {
+//            type: 'value'
+//        },
+//        series: [{
+//            data: [820, 932, 901, 934, 1290, 1330, 1320],
+//            type: 'line',
+//                    smooth: true
+//        }]
+//        };
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM");
+        JsonObject option = new JsonObject();
+        JsonObject xAxis = new JsonObject();
+        JsonObject yAxis = new JsonObject();
+        JsonArray series = new JsonArray();
+        JsonArray data = new JsonArray();
+        Date date = new Date();
+        for (Price price : this.prices) {
+            date.setTime(price.getDate());
+            data.add(sdf.format(date));
+        }
+        xAxis.addProperty("type", "category");
+        xAxis.add("data", data);
+        yAxis.addProperty("type", "value");
+        data = new JsonArray();
+        for (Price price : this.prices) {
+            data.add(price.getPrice());
+        }
+        JsonObject inSeries = new JsonObject();
+        inSeries.add("data", data);
+        inSeries.addProperty("type", "line");
+        inSeries.addProperty("smooth", false);
+        series.add(inSeries);
+        option.add("xAxis", xAxis);
+        option.add("yAxis", yAxis);
+        option.add("series", series);
+        return new Gson().toJson(option);
+    }
 
-  public void setLatestPrice(String latestPrice) {
-    this.latestPrice = latestPrice;
-  }
 
-  public List<Price> getPrices() {
-    return prices;
-  }
+    public String getLatestPrice() {
+        return latestPrice;
+    }
 
-  public void setPrices(List<Price> prices) {
-    this.prices = prices;
-  }
+    public void setLatestPrice(String latestPrice) {
+        this.latestPrice = latestPrice;
+    }
 
-  public List<String> getScreenshots() {
-    return screenshots;
-  }
+    public List<Price> getPrices() {
+        return prices;
+    }
 
-  public void setScreenshots(List<String> screenshots) {
-    this.screenshots = screenshots;
-  }
+    public void setPrices(List<Price> prices) {
+        this.prices = prices;
+    }
 
-  public String getHeaderURL() {
-    return headerURL;
-  }
+    public List<String> getScreenshots() {
+        return screenshots;
+    }
 
-  public void setHeaderURL(String headerURL) {
-    this.headerURL = headerURL;
-  }
+    public void setScreenshots(List<String> screenshots) {
+        this.screenshots = screenshots;
+    }
 
-  public String getType() {
-    return type;
-  }
+    public String getHeaderURL() {
+        return headerURL;
+    }
 
-  public void setType(String type) {
-    this.type = type;
-  }
+    public void setHeaderURL(String headerURL) {
+        this.headerURL = headerURL;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getType() {
+        return type;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-  public int getSteamAppId() {
-    return steamAppId;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setSteamAppId(int steamAppId) {
-    this.steamAppId = steamAppId;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public int getRequiredAge() {
-    return requiredAge;
-  }
+    public int getSteamAppId() {
+        return steamAppId;
+    }
 
-  public void setRequiredAge(int requiredAge) {
-    this.requiredAge = requiredAge;
-  }
+    public void setSteamAppId(int steamAppId) {
+        this.steamAppId = steamAppId;
+    }
 
-  public boolean isFree() {
-    return isFree;
-  }
+    public int getRequiredAge() {
+        return requiredAge;
+    }
 
-  public void setFree(boolean free) {
-    isFree = free;
-  }
+    public void setRequiredAge(int requiredAge) {
+        this.requiredAge = requiredAge;
+    }
 
-  public String getDetailedDescription() {
-    return detailedDescription;
-  }
+    public boolean isFree() {
+        return isFree;
+    }
 
-  public void setDetailedDescription(String detailedDescription) {
-    this.detailedDescription = detailedDescription;
-  }
+    public void setFree(boolean free) {
+        isFree = free;
+    }
 
-  public String getSupportedLanguages() {
-    return supportedLanguages;
-  }
+    public String getDetailedDescription() {
+        return detailedDescription;
+    }
 
-  public void setSupportedLanguages(String supportedLanguages) {
-    this.supportedLanguages = supportedLanguages;
-  }
+    public void setDetailedDescription(String detailedDescription) {
+        this.detailedDescription = detailedDescription;
+    }
 
-  public List<String> getDevelopers() {
-    return developers;
-  }
+    public String getSupportedLanguages() {
+        return supportedLanguages;
+    }
 
-  public void setDevelopers(List<String> developers) {
-    this.developers = developers;
-  }
+    public void setSupportedLanguages(String supportedLanguages) {
+        this.supportedLanguages = supportedLanguages;
+    }
 
-  public List<String> getPublishers() {
-    return publishers;
-  }
+    public List<String> getDevelopers() {
+        return developers;
+    }
 
-  public void setPublishers(List<String> publishers) {
-    this.publishers = publishers;
-  }
+    public void setDevelopers(List<String> developers) {
+        this.developers = developers;
+    }
 
-  public List<String> getPlatforms() {
-    return platforms;
-  }
+    public List<String> getPublishers() {
+        return publishers;
+    }
 
-  public void setPlatforms(List<String> platforms) {
-    this.platforms = platforms;
-  }
+    public void setPublishers(List<String> publishers) {
+        this.publishers = publishers;
+    }
 
-  public int getScore() {
-    return score;
-  }
+    public List<String> getPlatforms() {
+        return platforms;
+    }
 
-  public void setScore(int score) {
-    this.score = score;
-  }
+    public void setPlatforms(List<String> platforms) {
+        this.platforms = platforms;
+    }
 
-  public List<String> getCategories() {
-    return categories;
-  }
+    public int getScore() {
+        return score;
+    }
 
-  public void setCategories(List<String> categories) {
-    this.categories = categories;
-  }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-  public List<String> getGenres() {
-    return genres;
-  }
+    public List<String> getCategories() {
+        return categories;
+    }
 
-  public void setGenres(List<String> genres) {
-    this.genres = genres;
-  }
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 
-  public int getRecommendations() {
-    return recommendations;
-  }
+    public List<String> getGenres() {
+        return genres;
+    }
 
-  public void setRecommendations(int recommendations) {
-    this.recommendations = recommendations;
-  }
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
 
-  public long getReleaseDate() {
-    return releaseDate;
-  }
+    public int getRecommendations() {
+        return recommendations;
+    }
 
-  public void setReleaseDate(long releaseDate) {
-    this.releaseDate = releaseDate;
-  }
+    public void setRecommendations(int recommendations) {
+        this.recommendations = recommendations;
+    }
 
-  public String getBackgroundURL() {
-    return backgroundURL;
-  }
+    public long getReleaseDate() {
+        return releaseDate;
+    }
 
-  public void setBackgroundURL(String backgroundURL) {
-    this.backgroundURL = backgroundURL;
-  }
+    public void setReleaseDate(long releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getBackgroundURL() {
+        return backgroundURL;
+    }
+
+    public void setBackgroundURL(String backgroundURL) {
+        this.backgroundURL = backgroundURL;
+    }
 }

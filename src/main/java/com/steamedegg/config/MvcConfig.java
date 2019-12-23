@@ -20,6 +20,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @PropertySource("classpath:application.properties")
 public class MvcConfig implements WebMvcConfigurer {
     @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver vr = new InternalResourceViewResolver();
         vr.setPrefix("/WEB-INF/jsp/");
@@ -30,11 +35,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public StandardServletMultipartResolver getStandardServletMultipartResolver() {
         return new StandardServletMultipartResolver();
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Override

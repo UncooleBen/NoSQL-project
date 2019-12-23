@@ -4,10 +4,7 @@ import com.steamedegg.databaseservice.AppDao;
 import com.steamedegg.model.App;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppDaoImplTest {
 

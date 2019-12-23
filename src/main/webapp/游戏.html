@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/mystyle.css" rel='stylesheet' type='text/css' />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Google Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	
+	var filterList = {
+	
+		init: function () {
+		
+			// MixItUp plugin
+			// http://mixitup.io
+			$('#portfoliolist').mixitup({
+				targetSelector: '.portfolio',
+				filterSelector: '.filter',
+				effects: ['fade'],
+				easing: 'snap',
+				// call the hover effect
+				onMixEnd: filterList.hoverEffect()
+			});				
+		
+		},
+		
+		hoverEffect: function () {
+		
+			// Simple parallax effect
+			$('#portfoliolist .portfolio').hover(
+				function () {
+					$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+					$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+				},
+				function () {
+					$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+					$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+				}		
+			);				
+		
+		}
+
+	};
+	
+	// Run the show!
+	filterList.init();
+	
+	
+});	
+</script>
+    <script src="js/echarts.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+  </style>
+</head>
+<body>
+
+<div class="header">
+	<div class="container">
+		<div class="logo">
+			<a href="index.html"><img src="images/logo.png" alt=""></a>
+		</div>
+		<span class="menu"></span>
+		<div class="navigation">
+			<ul class="navig cl-effect-3" >
+				<li><a href="index.html">Home</a></li>
+				<li><a href="games.html">Games</a></li>
+				<li><a href="blog.html">Blog</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+			<div class="search-bar">
+					<input type="text" placeholder="search" required=""  value="search"/>
+					<input type="submit" value="" />
+			</div>
+			<div class="clearfix"></div>
+			<script>
+				$( "span.menu" ).click(function() {
+				  $( ".navigation" ).slideToggle( "slow", function() {
+				    // Animation complete.
+				  });
+				});
+			</script>
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="games">
+
+<div id="name" class="gameName">PENGGE</div>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- 指示符 -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+ 
+  <!-- 轮播图片 -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/image1.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="images/image2.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="images/image3.jpg">
+    </div>
+  </div>
+ 
+  <!-- 左右切换按钮 -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+ 
+</div>
+
+<div class="gamedes">
+            <div class="row">
+                <div class="col-sm-4" style="background-color:lavender;">
+                    开发商
+                </div>
+                <div class="col-sm-8" style="background-color:lavenderblush;">
+                    彭哥
+                </div>
+            </div>
+            <div class="row">
+             <div class="col-sm-4" style="background-color:lavender;">
+                    发行商
+            </div>
+            <div class="col-sm-8" style="background-color:lavenderblush;">
+                    阿海
+            </div>
+           </div>
+            <div class="row">
+                <div class="col-sm-4" style="background-color:lavender;">
+                    发行日期
+                </div>
+                <div class="col-sm-8" style="background-color:lavenderblush;">
+                    2077
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="background-color:lavender;">
+                    APPID
+                </div>
+                <div class="col-sm-8" style="background-color:lavenderblush;">
+                    130B
+                </div>
+            </div>
+        </div>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                游戏描述
+            </h3>
+        </div>
+        <div class="panel-body">
+            彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB彭哥NB
+        </div>
+    </div>
+</div>
+    <div class="container">
+    <h3 class="page-header">标签</h3>
+    <ul class="tags_links">
+        <li><a href="#">FPS</a></li>
+        <li><a href="#">RPG</a></li>
+        <li><a href="#">18R</a></li>
+        <li><a href="#">Soullike</a></li>
+        <li><a href="#">TPS</a></li>
+        <li><a href="#">Gal</a></li>
+        <li><a href="#">Moba</a></li>
+        <li><a href="#">RTS</a></li>
+    </ul>
+    </div>
+
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="echart" style="width: 600px;height:400px;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</div>
+<!--body结束-->
+
+
+</body>
+</html>

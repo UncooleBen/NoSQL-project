@@ -6,10 +6,7 @@ import com.steamedegg.databaseservice.AppDao;
 import com.steamedegg.databaseservice.DatabaseService;
 import com.steamedegg.model.App;
 import com.steamedegg.model.Price;
-import org.bson.BsonDocument;
 import org.bson.Document;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.conversions.Bson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -172,6 +169,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
     public List<App> queryAppByCategory(List<String> categories, int skip, int limit) {
         MongoCursor documents = collection
                 .find(all("categories.description", categories))
+                .sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
         List<App> apps = new ArrayList<>();
         for (MongoCursor it = documents; it.hasNext(); ) {
@@ -182,9 +180,9 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
     }
 
     @Override
-    public List<App> queryAppByGenres(List<String> genres, int skip, int limit) {
+    public List<App> queryAppByName(String name, int skip, int limit) {
         MongoCursor documents = collection
-                .find(all("genres.description", genres))
+                .find(eq("name", name)).sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
         List<App> apps = new ArrayList<>();
         for (MongoCursor it = documents; it.hasNext(); ) {

@@ -82,18 +82,21 @@
                 <li><a href="contact">Contact</a></li>
             </ul>
             <!-- Example split danger button -->
-            <div class="btn-group">
-                <select class="form-control">
-                    <option>名称</option>
-                    <option>类别</option>
-                    <option>AppID</option>
-                </select>
-            </div>
+            <form action="search" method="get">
+                <div class="btn-group">
+                    <select class="form-control" name="field">
+                        <option value="name">名称</option>
+                        <option value="category">类别</option>
+                        <option value="appid">AppID</option>
+                    </select>
+                </div>
 
-            <div class="search-bar">
-                <input type="text" placeholder="search" required=""  value="search"/>
-                <input type="submit" value="" />
-            </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="search" required="" name="value" value=""/>
+                    <input type="submit" value="" />
+                    <input type="text" name="page" value="1" hidden="true"/>
+                </div>
+            </form>
             <div class="clearfix"></div>
             <script>
                 $( "span.menu" ).click(function() {
@@ -141,6 +144,13 @@
                     </div>
                     <p>
                         ${app.shortDescription}
+                    </p>
+                    <p>
+                        <ul class="tags_links">
+                            <c:forEach var="category" items="${app.categories}">
+                                <li><a href="#" >${category}</a></li>
+                            </c:forEach>
+                        </ul>
                     </p>
                 </div>
             </div>

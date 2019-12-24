@@ -39,10 +39,10 @@ public class ListController {
         return mv;
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(@RequestParam("field") String field, @RequestParam("value") String value,
                                @RequestParam("page") int page) {
-        ModelAndView mv = new ModelAndView("search");
+        ModelAndView mv = new ModelAndView("list");
         List<App> appList;
         switch (field) {
             case "category":
@@ -50,10 +50,8 @@ public class ListController {
                 categories.add(value);
                 appList = this.appDao.queryAppByCategory(categories, 0, 20);
                 break;
-            case "genre":
-                List<String> genres = new ArrayList<>();
-                genres.add(value);
-                appList = this.appDao.queryAppByGenres(genres,0, 20);
+            case "name":
+                appList = this.appDao.queryAppByName(value,0, 20);
                 break;
             case "appid":
                 int appid = Integer.parseInt(value);

@@ -31,14 +31,14 @@ public interface AppDao {
     List<App> queryAppByCategory(List<String> categories, int skip, int limit);
 
     /**
-     * Query a list of apps that the value in genres matches the specified genres list.
+     * Query a list of apps that the value in name matches the specified name.
      *
-     * @param genres The List of genres that a game should have
-     * @param skip   Skip for a number of documents
-     * @param limit  Limit the query result documents
-     * @return A list of apps that commensurate the given genres
+     * @param name
+     * @param skip  Skip for a number of documents
+     * @param limit Limit the query result documents
+     * @return A list of apps that commensurate the given name
      */
-    List<App> queryAppByGenres(List<String> genres, int skip, int limit);
+    List<App> queryAppByName(String name, int skip, int limit);
 
     /**
      * Query a list of apps from the very start of the mongodb collection.

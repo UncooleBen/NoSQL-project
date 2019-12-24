@@ -226,6 +226,10 @@
             success : function(jsonStr) {
                 // 指定图表的配置项和数据
                 // 使用刚指定的配置项和数据显示图表。
+                if (jsonStr == null || jsonStr=="") {
+                    document.getElementById('echart').style.visibility = 'hidden';
+                    return;
+                }
                 var json = JSON.parse(jsonStr);
                 var option = {
                     xAxis: {

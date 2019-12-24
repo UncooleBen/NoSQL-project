@@ -36,6 +36,9 @@ public class App {
     private String headerURL;
 
     public String getPricesJSON() {
+        if (this.prices.size()==0) {
+            return null;
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM");
         JsonObject option = new JsonObject();
         JsonObject xAxis = new JsonObject();

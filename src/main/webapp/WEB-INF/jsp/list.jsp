@@ -14,7 +14,7 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/js/jquery.mixitup.min.js"></script>
     <script type="text/javascript">
         $(function () {
 
@@ -59,7 +59,7 @@
 
         });
     </script>
-    <script src="js/echarts.min.js"></script>
+    <script src="resources/bootstrap/js/echarts.min.js"></script>
     <style>
         /* Make the image fully responsive */
         .carousel-inner img {
@@ -72,7 +72,7 @@
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.html"><img src="images/logo.png" alt=""></a>
+            <a href="index.html"><img src="resources/bootstrap/images/logo.png" alt=""></a>
         </div>
         <span class="menu"></span>
         <div class="navigation">

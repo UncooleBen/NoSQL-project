@@ -15,6 +15,7 @@
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
+
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
@@ -93,12 +94,24 @@
             <ul class="navig cl-effect-3">
                 <li><a href="index">Home</a></li>
                 <li><a href="list?page=1">Games</a></li>
+                <li><a href="blogs?page=1">Blog</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="search" required="" value="search"/>
-                <input type="submit" value=""/>
-            </div>
+            <form action="search" method="get">
+                <div class="btn-group">
+                    <select class="form-control" name="field">
+                        <option value="name">名称</option>
+                        <option value="category">类别</option>
+                        <option value="appid">AppID</option>
+                    </select>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="search" required="" name="value" value=""/>
+                    <input type="submit" value=""/>
+                    <input type="text" name="page" value="1" hidden="true"/>
+                </div>
+            </form>
             <div class="clearfix"></div>
             <script>
                 $("span.menu").click(function () {
@@ -220,13 +233,13 @@
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echart'));
         $.ajax({
-            url : 'chart',
+            url: 'chart',
             type: 'GET',
-            data : { 'appId' : ${app.steamAppId} },
-            success : function(jsonStr) {
+            data: {'appId': ${app.steamAppId}},
+            success: function (jsonStr) {
                 // 指定图表的配置项和数据
                 // 使用刚指定的配置项和数据显示图表。
-                if (jsonStr == null || jsonStr=="") {
+                if (jsonStr == null || jsonStr == "") {
                     document.getElementById('echart').style.visibility = 'hidden';
                     return;
                 }

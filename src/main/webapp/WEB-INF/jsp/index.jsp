@@ -10,10 +10,16 @@
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <link href="resources/bootstrap/css/style.css" rel='stylesheet' type='text/css' />
-    <link href="resources/bootstrap/css/mystyle.css" rel='stylesheet' type='text/css' />
-    <link type="text/css" href="resources/bootstrap/css/3dstyle.css" rel="stylesheet" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="resources/bootstrap/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="resources/bootstrap/css/mystyle.css" rel='stylesheet' type='text/css'/>
+    <link type="text/css" href="resources/bootstrap/css/3dstyle.css" rel="stylesheet"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="resources/bootstrap/js/jquery.mixitup.min.js"></script>
@@ -78,19 +84,31 @@
         </div>
         <span class="menu"></span>
         <div class="navigation">
-            <ul class="navig cl-effect-3" >
+            <ul class="navig cl-effect-3">
                 <li><a href="index">Home</a></li>
                 <li><a href="list?page=1">Games</a></li>
+                <li><a href="blogs?page=1">Blog</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="search" required=""  value="search"/>
-                <input type="submit" value="" />
-            </div>
+            <form action="search" method="get">
+                <div class="btn-group">
+                    <select class="form-control" name="field">
+                        <option value="name">名称</option>
+                        <option value="category">类别</option>
+                        <option value="appid">AppID</option>
+                    </select>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="search" required="" name="value" value=""/>
+                    <input type="submit" value=""/>
+                    <input type="text" name="page" value="1" hidden="true"/>
+                </div>
+            </form>
             <div class="clearfix"></div>
             <script>
-                $( "span.menu" ).click(function() {
-                    $( ".navigation" ).slideToggle( "slow", function() {
+                $("span.menu").click(function () {
+                    $(".navigation").slideToggle("slow", function () {
                         // Animation complete.
                     });
                 });
@@ -102,7 +120,7 @@
 </div>
 
 <div class="mydiv">
-<div class="a3d"></div>
+    <div class="a3d"></div>
 </div>
 <script src="resources/bootstrap/js/index.js"></script>
 </body>

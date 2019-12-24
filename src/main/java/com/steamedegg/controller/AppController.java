@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.List;
  * @author Juntao Peng
  */
 @Controller
-public class ListController {
+public class AppController {
 
     AppDao appDao;
 
     @Autowired
-    public ListController(AppDao appDao) {
+    public AppController(AppDao appDao) {
         this.appDao = appDao;
     }
 
@@ -51,7 +52,7 @@ public class ListController {
                 appList = this.appDao.queryAppByCategory(categories, 0, 20);
                 break;
             case "name":
-                appList = this.appDao.queryAppByName(value,0, 20);
+                appList = this.appDao.queryAppByName(value, 0, 20);
                 break;
             case "appid":
                 int appid = Integer.parseInt(value);
@@ -69,5 +70,21 @@ public class ListController {
         mv.addObject("totalDocument", totalDocumentNumber);
         mv.addObject("currentPage", page);
         return mv;
+    }
+
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public ModelAndView detail(@RequestParam("appid") int appid) {
+        ModelAndView mv = new ModelAndView("detail");
+        App app = this.appDao.queryAppByAppId(appid);
+        mv.addObject("app", app);
+        return mv;
+    }
+
+    @RequestMapping(value = "/chart", method = RequestMethod.GET)
+    @ResponseBody
+    public String getChartJSON(int appId) {
+        App app = this.appDao.queryAppByAppId(appId);
+        String json = app.getPricesJSON();
+        return json;
     }
 }

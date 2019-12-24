@@ -1,71 +1,81 @@
-.games {padding: 1em 0 2em;}
-.gameName {
-		width:500px;
-		font-size:40px;
-		margin:0 auto;
-		color:#00F
-	}
-.gamedes{
-		background:lightgreen;
-		padding:50px;
-		border:lightseagreen 50px solid;
-		margin:20px;
-	}
-.page-header {
-	font-size: 1.2em;
-	color: #ff7105;
-	font-weight: 500;
-	margin: 0.5em 0 1em;
-	text-transform: uppercase;
+.games {
+    padding: 1em 0 2em;
 }
+
+.gameName {
+    width: 500px;
+    font-size: 40px;
+    margin: 0 auto;
+    color: #00F
+}
+
+.gamedes {
+    background: lightgreen;
+    padding: 50px;
+    border: lightseagreen 50px solid;
+    margin: 20px;
+}
+
+.page-header {
+    font-size: 1.2em;
+    color: #ff7105;
+    font-weight: 500;
+    margin: 0.5em 0 1em;
+    text-transform: uppercase;
+}
+
 .tags_links {
-	padding: 0;
-	list-style: none;
-	width: 100%;
+    padding: 0;
+    list-style: none;
+    width: 100%;
 }
 
 .panel-title {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 16px;
-	color: inherit;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
 }
 
 .panel-body {
-	padding: 15px;
+    padding: 15px;
 }
+
 .panel {
-	margin-bottom: 20px;
-	background-color: rgba(255, 255, 255, 0.5);
-	border: 1px solid transparent;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
+
 .panel-heading {
-	padding: 10px 15px;
-	border-bottom: 1px solid transparent;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
+
 .panel-default {
-	border-color: #ddd;
+    border-color: #ddd;
 }
 
-.mydiv{
-	  overflow: hidden;
-	  height: 100vh;
-	  perspective: 80em;
-	  background: #000000	;
-	  font: 900 1.65em/ 2 vt323, monospace;
-	  transform-style: preserve-3d;
-  }
-
-.key,after {
-	position: absolute;
+.mydiv {
+    overflow: hidden;
+    height: 100vh;
+    perspective: 80em;
+    background: #000000;
+    font: 900 1.65em/ 2 vt323, monospace;
+    transform-style: preserve-3d;
 }
-.a3d,after {
-	position: absolute;
+
+.key, after {
+    position: absolute;
+}
+
+.a3d, after {
+    position: absolute;
 }
 
 

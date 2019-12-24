@@ -70,6 +70,7 @@
             <ul class="navig cl-effect-3">
                 <li><a href="index">Home</a></li>
                 <li><a href="list?page=1">Games</a></li>
+                <li><a href="blogs?page=1">Blog</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
         </div>

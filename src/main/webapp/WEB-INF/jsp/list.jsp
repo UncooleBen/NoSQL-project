@@ -9,10 +9,16 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="resources/bootstrap/css/style.css" rel='stylesheet' type='text/css' />
-    <link href="resources/bootstrap/css/mystyle.css" rel='stylesheet' type='text/css' />
-    <link href="resources/bootstrap/css/guojian.min.css" rel='stylesheet' />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="resources/bootstrap/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="resources/bootstrap/css/mystyle.css" rel='stylesheet' type='text/css'/>
+    <link href="resources/bootstrap/css/guojian.min.css" rel='stylesheet'/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="resources/bootstrap/js/jquery.mixitup.min.js"></script>
     <script type="text/javascript">
@@ -76,9 +82,10 @@
         </div>
         <span class="menu"></span>
         <div class="navigation">
-            <ul class="navig cl-effect-3" >
+            <ul class="navig cl-effect-3">
                 <li><a href="index">Home</a></li>
                 <li><a href="list?page=1">Games</a></li>
+                <li><a href="blogs?page=1">Blog</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
             <!-- Example split danger button -->
@@ -93,14 +100,14 @@
 
                 <div class="search-bar">
                     <input type="text" placeholder="search" required="" name="value" value=""/>
-                    <input type="submit" value="" />
+                    <input type="submit" value=""/>
                     <input type="text" name="page" value="1" hidden="true"/>
                 </div>
             </form>
             <div class="clearfix"></div>
             <script>
-                $( "span.menu" ).click(function() {
-                    $( ".navigation" ).slideToggle( "slow", function() {
+                $("span.menu").click(function () {
+                    $(".navigation").slideToggle("slow", function () {
                         // Animation complete.
                     });
                 });
@@ -114,11 +121,12 @@
     function getHref(appId) {
         window.location = 'detail?appid=' + appId;
     }
+
     function gotoPage(page) {
-        if (page>${totalPage}) {
+        if (page >${totalPage}) {
             page = ${totalPage};
         }
-        if (page==0) {
+        if (page == 0) {
             page = 1;
         }
         window.location = 'list?page=' + page;
@@ -140,24 +148,30 @@
                         <h4>${app.name}</h4>
                     </a>
                     <div class="gtw-sx">
-                        <p><h1>${(empty app.latestPrice) ? "免费" : "￥"}${(empty app.latestPrice) ? "" : app.latestPrice}</h1></p>
+                        <p>
+                        <h1>${(empty app.latestPrice) ? "免费" : "￥"}${(empty app.latestPrice) ? "" : app.latestPrice}</h1></p>
                     </div>
                     <p>
-                        ${app.shortDescription}
+                            ${app.shortDescription}
                     </p>
                     <p>
-                        <ul class="tags_links">
-                            <c:forEach var="category" items="${app.categories}">
-                                <li><a href="#" >${category}</a></li>
-                            </c:forEach>
-                        </ul>
+                    <ul class="tags_links">
+                        <c:forEach var="category" items="${app.categories}">
+                            <li><a href="#">${category}</a></li>
+                        </c:forEach>
+                    </ul>
                     </p>
                 </div>
             </div>
         </c:forEach>
     </div>
     <nav class="gj-page">
-        <span class="pageinfo">共<strong>${totalPage}</strong>页<strong>${totalDocument}</strong>条记录</span><a href="javascript:gotoPage(1)" class="homepage">首页</a><a href="javascript:gotoPage(${currentPage-1})" class="nopage">上页</a><a href="" class="listpage curpage">${currentPage}</a><a href="javascript:gotoPage(${currentPage+1})" class="nopage">下页</a><a href="javascript:gotoPage(${totalPage})" class="endpage">尾页</a></nav>
+        <span class="pageinfo">共<strong>${totalPage}</strong>页<strong>${totalDocument}</strong>条记录</span><a
+            href="javascript:gotoPage(1)" class="homepage">首页</a><a href="javascript:gotoPage(${currentPage-1})"
+                                                                    class="nopage">上页</a><a href=""
+                                                                                            class="listpage curpage">${currentPage}</a><a
+            href="javascript:gotoPage(${currentPage+1})" class="nopage">下页</a><a
+            href="javascript:gotoPage(${totalPage})" class="endpage">尾页</a></nav>
 </div>
 
 </body>

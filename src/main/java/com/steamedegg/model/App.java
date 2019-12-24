@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class App {
     private String headerURL;
 
     public String getPricesJSON() {
-        if (this.prices.size()==0) {
+        if (this.prices.size() == 0) {
             return null;
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM");

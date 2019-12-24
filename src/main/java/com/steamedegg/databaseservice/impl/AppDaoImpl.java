@@ -161,13 +161,13 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
 
     @Override
     public App queryAppByAppId(int appId) {
-        Document document = (Document) collection.find(eq("steam_appid", appId)).first();
+        Document document = (Document) apps.find(eq("steam_appid", appId)).first();
         return convertDocumentToApp(document);
     }
 
     @Override
     public List<App> queryAppByCategory(List<String> categories, int skip, int limit) {
-        MongoCursor documents = collection
+        MongoCursor documents = apps
                 .find(all("categories.description", categories))
                 .sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
@@ -181,7 +181,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
 
     @Override
     public List<App> queryAppByName(String name, int skip, int limit) {
-        MongoCursor documents = collection
+        MongoCursor documents = apps
                 .find(eq("name", name)).sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
         List<App> apps = new ArrayList<>();
@@ -194,7 +194,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
 
     @Override
     public List<App> queryAllApp(int skip, int limit) {
-        MongoCursor documents = collection
+        MongoCursor documents = apps
                 .find().sort(new BasicDBObject("recommendations.total", -1))
                 .skip(skip).limit(limit).iterator();
         List<App> apps = new ArrayList<>();
@@ -207,7 +207,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
 
     @Override
     public int queryDocumentNumber() {
-        return (int) collection.countDocuments();
+        return (int) apps.countDocuments();
     }
 
 }

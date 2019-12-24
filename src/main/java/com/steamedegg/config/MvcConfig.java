@@ -2,7 +2,9 @@ package com.steamedegg.config;
 
 
 import com.steamedegg.databaseservice.AppDao;
+import com.steamedegg.databaseservice.BlogDao;
 import com.steamedegg.databaseservice.impl.AppDaoImpl;
+import com.steamedegg.databaseservice.impl.BlogDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +47,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public AppDao getAppDao() {
         return (new AppDaoImpl());
+    }
+
+    @Bean
+    public BlogDao getBlogDao() {
+        return new BlogDaoImpl();
     }
 
 }

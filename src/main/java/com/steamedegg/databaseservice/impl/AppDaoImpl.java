@@ -40,6 +40,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         }
         boolean isFree = (boolean) document.get("is_free");
         String detailedDescription = (String) document.get("detailed_description");
+        String shortDescription = (String) document.get("short_description");
         String supportedLanguages = (String) document.get("supported_languages");
         List<String> developers = (ArrayList<String>) document.get("developers");
         List<String> publishers = (ArrayList<String>) document.get("publishers");
@@ -143,6 +144,7 @@ public class AppDaoImpl extends DatabaseService implements AppDao {
         app.setRequiredAge(requiredAge);
         app.setFree(isFree);
         app.setDetailedDescription(detailedDescription);
+        app.setShortDescription(shortDescription);
         app.setSupportedLanguages(supportedLanguages);
         app.setDevelopers(developers);
         app.setPublishers(publishers);

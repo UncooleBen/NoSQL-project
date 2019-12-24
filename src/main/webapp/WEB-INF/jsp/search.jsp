@@ -88,8 +88,11 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">App ID</a>
-                    <a class="dropdown-item" href="#">类型</a>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
                 </div>
             </div>
 
@@ -140,11 +143,8 @@
                         <h4>${app.name}</h4>
                     </a>
                     <div class="gtw-sx">
-                        <p><h1>${(empty app.latestPrice) ? "免费" : "￥"}${(empty app.latestPrice) ? "" : app.latestPrice}</h1></p>
+                        <p>${app.latestPrice}</p>
                     </div>
-                    <p>
-                        ${app.shortDescription}
-                    </p>
                 </div>
             </div>
         </c:forEach>

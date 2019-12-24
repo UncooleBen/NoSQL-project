@@ -91,11 +91,9 @@
         <span class="menu"></span>
         <div class="navigation">
             <ul class="navig cl-effect-3">
-                <li><a href="index.jsp">Home</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index">Home</a></li>
+                <li><a href="list?page=1">Games</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
             <div class="search-bar">
                 <input type="text" placeholder="search" required="" value="search"/>

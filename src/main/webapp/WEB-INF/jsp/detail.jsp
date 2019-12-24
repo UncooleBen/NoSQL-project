@@ -114,7 +114,8 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<div class="games">
+
+<div class="games" id="#id_games_container">>
 
     <div id="name" class="gameName">${app.name}</div>
 
@@ -210,9 +211,14 @@
     </div>
 
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="echart" style="width: 600px;height:400px;"></div>
-
+    <div class="panel-body" id="echart" style="background-color:white; height:400px;"></div>
     <script type="text/javascript">
+        var id_games_container = document.getElementById('#id_games_container');
+        var url = 'url(';
+        url += '${app.backgroundURL}';
+        url += ')';
+        id_games_container.style.backgroundImage = url;
+        id_games_container.style.backgroundAttachment = 'fixed';
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echart'));
         $.ajax({
@@ -234,6 +240,7 @@
                     series: [{
                         data: json["series"][0]["data"],
                         type: 'line',
+                        step: 'middle'
                     }]
                 };
                 myChart.setOption(option);

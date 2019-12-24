@@ -51,3 +51,22 @@
 .panel-default {
 	border-color: #ddd;
 }
+
+.mydiv{
+	  overflow: hidden;
+	  height: 100vh;
+	  perspective: 80em;
+	  background: #000000	;
+	  font: 900 1.65em/ 2 vt323, monospace;
+	  transform-style: preserve-3d;
+  }
+
+.key,after {
+	position: absolute;
+}
+.a3d,after {
+	position: absolute;
+}
+
+
+

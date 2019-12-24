@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 实例</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/mystyle.css" rel='stylesheet' type='text/css' />
+    <link href="css/guojian.min.css" rel='stylesheet' />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var filterList = {
+
+                init: function () {
+
+                    // MixItUp plugin
+                    // http://mixitup.io
+                    $('#portfoliolist').mixitup({
+                        targetSelector: '.portfolio',
+                        filterSelector: '.filter',
+                        effects: ['fade'],
+                        easing: 'snap',
+                        // call the hover effect
+                        onMixEnd: filterList.hoverEffect()
+                    });
+
+                },
+
+                hoverEffect: function () {
+
+                    // Simple parallax effect
+                    $('#portfoliolist .portfolio').hover(
+                        function () {
+                            $(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+                            $(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');
+                        },
+                        function () {
+                            $(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+                            $(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');
+                        }
+                    );
+
+                }
+
+            };
+
+            // Run the show!
+            filterList.init();
+
+
+        });
+    </script>
+    <script src="js/echarts.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+        <span class="menu"></span>
+        <div class="navigation">
+            <ul class="navig cl-effect-3" >
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <!-- Example split danger button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger">Action</button>
+                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="search" required=""  value="search"/>
+                <input type="submit" value="" />
+            </div>
+            <div class="clearfix"></div>
+            <script>
+                $( "span.menu" ).click(function() {
+                    $( ".navigation" ).slideToggle( "slow", function() {
+                        // Animation complete.
+                    });
+                });
+            </script>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="gj-wk gcl-hb">
+    <!--媒体列表-->
+    <div class="gj-bt">
+        <h3><i class="fa fa-list-ul" aria-hidden="true"></i> 搜索结果</h3>
+    </div>
+    <div class="gj-body gul-tuw1">
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="13.html"><img src="static/picture/180313112630855.jpg" alt="未备案网站免费使用畅言社会化评论系统的教程"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="13.html">
+                    <h4>未备案网站免费使用畅言社会化评论系统的教程</h4>
+                </a>
+                <p>好端端的多说社会化评论系统的官方近期发表了声明即将关闭服务，而大名鼎鼎的搜狐畅言评论系统需要网站域名备案才能用，那么今天博主就教大...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="11.html"><img src="static/picture/180313112722593.jpg" alt="一个可怕的现象愈演愈烈：穷人家的“富二代”越来越多"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="11.html">
+                    <h4>一个可怕的现象愈演愈烈：穷人家的“富二代”越来越多</h4>
+                </a>
+                <p>今天的父母，总想着把最好的条件给孩子，这其实是在害孩子。成长过程中，物质越充裕，精神越疲敝；精神疲敝时，创造物质的脚步自然会停歇。反之，给孩子真实的成长，让孩子懂得困难与艰辛，教孩子珍惜馈赠...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="8.html"><img src="static/picture/180313112951280.jpg" alt="phpStudy最新使用教程 - 让天下没有难配的php环境"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="8.html">
+                    <h4>phpStudy最新使用教程 - 让天下没有难配的php环境</h4>
+                </a>
+                <p>一次性安装，无须配置即可使用，是非常方便、好用的PHP调试环境。该程序绿色小巧简易迷你仅有32M，有专门的控制面板。总之学习PHP只需一个包。对学习PHP的新手来说，WINDOWS下环境配置是一件很困难的事；...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="7.html"><img src="static/picture/180313113309948.jpg" alt="博主早年崇拜的知名80后创业标杆人物茅侃侃竟然自杀了"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="7.html">
+                    <h4>博主早年崇拜的知名80后创业标杆人物茅侃侃竟然自杀了</h4>
+                </a>
+                <p>茅侃侃个人经历：1983年出生于北京，小学五年级开始玩电脑，14岁便在《大众软件》等杂志发表数篇文章，并自行设计开发软件。2004年开始创业...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="5.html"><img src="static/picture/180313113835757.jpg" alt="一枚程序媛妹子口中的IT男其实是这样的"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="5.html">
+                    <h4>一枚程序媛妹子口中的IT男其实是这样的</h4>
+                </a>
+                <p>本人女，程序员一枚。讲讲我周围的it男吧。坐在我对面的小哥，有一阵当当做活动，满200减100什么的吧，他说他买书了。过几天，搬了一摞书回...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+        <div class="gtw-ul gclear">
+            <div class="gtw-img">
+                <a href="4.html"><img src="static/picture/180125053634150.jpg" alt="给web前端开发人员的一些建议"></a>
+            </div>
+            <div class="gtw-body">
+                <a href="4.html">
+                    <h4>给web前端开发人员的一些建议</h4>
+                </a>
+                <p>前端这一行，入门并不困难，掌握XHTML+CSS之后，基本上就可以找到一份工作。其他的东西，我们可以入职后再慢慢学习。那怎么才算掌握？掌握...</p>
+                <div class="gtw-sx">
+                    <p>价格</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--gul-tuw1-结束-->
+    <nav class="gj-page">
+        <span class="pageinfo">共<strong>1</strong>页<strong>6</strong>条记录</span><a href="111.html" class="homepage">首页</a><a href="111.html" class="nopage">上页</a><a href="111.html" class="listpage curpage">1</a><a href="111.html" class="nopage">下页</a><a href="111.html" class="endpage">尾页</a>					</nav>
+</div>
+
+</body>
+</html>

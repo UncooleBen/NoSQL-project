@@ -37,7 +37,6 @@ public class BlogDaoImpl extends DatabaseService implements BlogDao {
     @Override
     public Blog queryBlogById(int id) {
         Document document = (Document) blogs.find(eq("id", id)).first();
-        System.out.println(document);
         return convertDocumentToBlog(document);
     }
 

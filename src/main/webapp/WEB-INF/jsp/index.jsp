@@ -80,7 +80,7 @@
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.jsp"><img src="resources/bootstrap/images/logo.png" alt=""></a>
+            <a href="index"><img src="resources/bootstrap/images/logo.png" alt=""></a>
         </div>
         <span class="menu"></span>
         <div class="navigation">

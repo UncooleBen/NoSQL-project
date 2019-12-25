@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 /**
  * @author Juntao Peng
  */
-public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -21,5 +21,7 @@ public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServlet
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+
 
 }

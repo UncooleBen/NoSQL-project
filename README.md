@@ -1,6 +1,6 @@
 # SteamedEgg
 This is a project for Information Storage and Management. It's only allowed for the use as a final project.  
-##Description
+## Description
 The project aims at providing history prices and some other information like tags and categories for all applications(primarily games) on Steam.
 ## Development Environment
 ### Framework

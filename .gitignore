@@ -3,3 +3,4 @@
 *.iml
 /data/*
 /scripts/record.txt
+scripts/log.txt

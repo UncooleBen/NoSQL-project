@@ -16,9 +16,9 @@ Tomcat 9.0.26
 2. In MongoDB, there must be a database named as `steamdb`.  
 3. In `steamdb`, 2 collections are needed which are named as `apps` and `blogs`.  
 4. Create index for documents in collection to bypass the 32MB limitation on query sorted documens
-4.1 Run `mongo` in commandline prompt
-4.2 `use steamdb`
-4.3 `db.apps.createIndex({"steam_appid" : 1}, { unique : true })`
-4.4 `db.apps.createIndex({"recommendations.total" : -1 })`
+  1. Run `mongo` in commandline prompt
+  2. `use steamdb`
+  3. `db.apps.createIndex({"steam_appid" : 1}, { unique : true })`
+  4. `db.apps.createIndex({"recommendations.total" : -1 })`
 
 Then, everything will work well.

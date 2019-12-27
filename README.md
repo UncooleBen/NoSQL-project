@@ -20,5 +20,6 @@ Tomcat 9.0.26
    2. `use steamdb`
    3. `db.apps.createIndex({"steam_appid" : 1}, { unique : true })`
    4. `db.apps.createIndex({"recommendations.total" : -1 })`
+5. Execute `scripts/getAppPriceFromSteam.py` as a system service
 
 Then, everything will work well.

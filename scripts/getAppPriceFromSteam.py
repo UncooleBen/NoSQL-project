@@ -32,7 +32,7 @@ def getSortedAppids(appidList):
         appidList.append(app_dict['appid'])
     appidList.sort()
 
-def getAppPrice(appid):
+def getAppPriceAndResponse(appid):
     region='CN'
     language='schinese'
     #price: -3 -> unknown error, -2 -> success=false, -1 -> is_free=true , 0 -> discount_percent=100
@@ -50,91 +50,148 @@ def getAppPrice(appid):
                 price=-3
         else:
             price=-1
-    return price
+    return price,response
 
+def getAppDetail(appid,response):
+    jsonData=response.json()['%s'%appid]['data']
+    newApp={}
+    #string
+    newApp['type']=jsonData['type']
+    #string
+    newApp['name']=jsonData['name']
+    #int
+    newApp['steam_appid']=jsonData['steam_appid']
+    #int
+    newApp['required_age']=jsonData['required_age']
+    #boolean
+    newApp['is_free']=jsonData['is_free']
+    #string
+    newApp['detailed_description']=jsonData['detailed_description']
+    #string
+    newApp['about_the_game']=jsonData['about_the_game']
+    #string
+    newApp['short_description']=jsonData['short_description']
+    #string
+    newApp['supported_languages']=jsonData['supported_languages']
+    #string
+    newApp['header_image']=jsonData['header_image']
+    #string
+    newApp['website']=jsonData['website']
+    #object
+    newApp['pc_requirements']=jsonData['pc_requirements']
+    #object
+    newApp['mac_requirements']=jsonData['mac_requirements']
+    #object
+    newApp['linux_requirements']=jsonData['linux_requirements']
+    #array
+    newApp['developers']=jsonData['developers']
+    #array
+    newApp['publishers']=jsonData['publishers']
+    #array
+    newApp['packages']=jsonData['packages']
+    #array
+    newApp['package_groups']=jsonData['package_groups']
+    #object
+    newApp['platforms']=jsonData['platforms']
+    #object
+    newApp['metacritic']=jsonData['metacritic']
+    #array
+    newApp['categories']=jsonData['categories']
+    #array
+    newApp['genres']=jsonData['genres']
+    #array
+    newApp['screenshots']=jsonData['screenshots']
+    #object
+    newApp['recommendations']=jsonData['recommendations']
+    #object
+    newApp['achievements']=jsonData['achievements']
+    #object
+    newApp['release_date']=jsonData['release_date']
+    #object
+    newApp['support_info']=jsonData['support_info']
+    #string
+    newApp['background']=jsonData['background']
+    #object
+    newApp['content_descriptors']=jsonData['content_descriptors']
+    return newApp
 
-# def combine_with_prices(json_dict, appid):
-#     price_list = []
-#     if 'price_overview' in json_dict:
-#         old_price = json_dict.pop('price_overview')
-#         try:
-#             with open(PRICE_DIRECTORY+'price-history-for-%s.csv' % (appid), 'r', encoding='utf-8-sig') as csvfile:
-#                 pricereader = list(csv.reader(csvfile, delimiter=',', quotechar='"'))
-#                 header = ['date', 'price']
-#                 for i in range(1, len(pricereader)):
-#                     row = pricereader[i]
-#                     date = row[0]
-#                     price = row[1]
-#                     price_list.append({header[0]:date, header[1]:price})
-#             print('price list in %s' % (appid))
-#         except:
-#             print('single price in %s' % (appid))
-#             price_list.append({ 'date':time.strftime('%Y-%m-%d %H:%M:%S'), 'price':old_price['initial']//100})
-    
-#     json_dict['prices'] = price_list
-
-# for filename in SOURCE_FILES:
-#     appid = (filename.split('-')[1]).split('.')[0]
-#     if appid in added:
-#         print('Skipping %s.' % (appid))
-#         continue
-#     filepath = SOURCE_DIRECTORY + filename
-#     with codecs.open(filepath, 'r', 'utf-8-sig') as fin:
-#         content = fin.read()
-#         json_dict = json.loads(content)
-#         for key in json_dict:
-#             json_dict = json_dict[key]
-#             break
-#     if (json_dict['success'] == True):
-#         json_dict = json_dict['data']
-#         combine_with_prices(json_dict, appid)
-#         collection.insert_one(json_dict)
-#     print('%s added to MongoDB.' % (appid))
-#     record.write(appid+'\n')
-    
-# client.close()
-# record.close()
+def updateAppidInDatabase(appid,logFile):
+    client,collection=getConnection()
+    logFile.write('working on %d\n'%appid)
+    price,response=getAppPriceAndResponse(appid)
+    if -2==price or -3==price:
+        return
+    queryFilter={'steam_appid':appid}
+    resultCursor=collection.find(queryFilter)
+    newValue={}
+    found=False
+    #Should have only 1 result if exists
+    for doc in resultCursor:
+        found=True
+        #Update price
+        if 'is_free' in doc:
+            if False==doc['is_free']:
+                if '$push' not in newValue:
+                    newValue['$push']={}
+                newValue['$push']['prices']=[currentDate,price]
+        #Update last_modified
+        if 'last_modified' in doc:
+            lastModified=doc['last_modified']
+            if lastModified<currentDate:
+                if '$set' not in newValue:
+                    newValue['$set']={}
+                newValue['$set']['last_modified']=currentDate
+        else:
+            if '$set' not in newValue:
+                    newValue['$set']={}
+            newValue['$set']['last_modified']=currentDate
+    if found and len(newValue)!=0:
+        collection.update_many(queryFilter,newValue)
+        logFile.write('updated %d\n'%appid)
+    #if appid is newly added
+    if not found:
+        newApp=getAppDetail(appid,response)
+        if False==newApp['is_free']:
+            newApp['prices']=[{'date':currentDate,'price':price}]
+        else:
+            newApp['prices']=[]
+        newApp['last_modified']=currentDate
+        collection.insert_one(newApp)
+        logFile.write('added %d\n'%appid)
+    client.close()
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding='utf-8-sig')
     #type(currentDate): string
-    currentDate=(datetime.datetime.utcnow()+datetime.timedelta(hours=-8)).date().strftime('%Y-%m-%d')
-    client,collection=getConnection()
-    appidList=[]
-    getSortedAppids(appidList)
-    for appid in appidList[:20]:
-        price=getAppPrice(appid)
-        if -2==price or -3==price:
-            continue
-        queryFilter={'steam_appid':appid}
-        resultCursor=collection.find(queryFilter)
-        newValue={}
-        found=False
-        #Should have only 1 result if exists
-        for doc in resultCursor:
-            found=True
-            #Update price
-            if 'is_free' in doc:
-                if False==doc['is_free']:
-                    if doc['prices'][-1][1]!=price:
-                        if '$push' not in newValue:
-                            newValue['$push']={}
-                        newValue['$push']['prices']=[currentDate,price]
-            #Update last_modified
-            if 'last_modified' in doc:
-                lastModified=doc['last_modified']
-                if lastModified<currentDate:
-                    if '$set' not in newValue:
-                        newValue['$set']={}
-                    newValue['$set']['last_modified']=currentDate
-            else:
-                if '$set' not in newValue:
-                        newValue['$set']={}
-                newValue['$set']['last_modified']=currentDate
-        if found and len(newValue)!=0:
-            updateCount=collection.update_many(queryFilter,newValue)
-            print('updated %d'%appid)
-    client.close()
+    previousDate='1970-01-01'
+    if not os.path.exists('.\\log'):
+        os.mkdir('.\\log')
+    while True:
+        currentDate=(datetime.datetime.utcnow()+datetime.timedelta(hours=-8)).date().strftime('%Y-%m-%d')
+        if previousDate<currentDate:
+            errorReport=open('log\\error_report.txt','a')
+            errorReport.write('------%s start------\n'%currentDate)
+            try:
+                logFile=open('log\\log_%s.txt'%currentDate,'w')
+                appidList=[]
+                getSortedAppids(appidList)
+                for appid in appidList:
+                    try:
+                        updateAppidInDatabase(appid,logFile)
+                    except:
+                        errorReport.write('exception occurs when working on appid %s\n'%appid)
+                previousDate=currentDate
+                logFile.close()
+            except:
+                errorReport.write('unknown exception occurs\n')
+            errorReport.write('------%s end------\n'%currentDate)
+            errorReport.close()
+        else:
+        #check time once an hour
+            time.sleep(3600)
+    
+    
+    
 
     
         
